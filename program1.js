@@ -3,17 +3,50 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    function isValid(s) {
-        // Implement the logic to check if the input string is valid here
-        // You can use a stack or other data structures to keep track of parentheses
-      
-        return result;
-      }
-      
-      module.exports = { isValid };
+    // Initialize a stack to store the opening parentheses
+    let stack = [];
     
+    // Map of matching parentheses
+    const map = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
+    
+    // Loop through each character in the string
+    for (let i = 0; i < s.length; i++) {
+        let char = s[i];
+        
+        // If it's a closing bracket
+        if (map[char]) {
+            // Pop from stack, if it's empty assign a dummy value
+            let topElement = stack.length === 0 ? '#' : stack.pop();
+            
+            // If the top of the stack doesn't match the corresponding opening parenthesis
+            if (topElement !== map[char]) {
+                return false;
+            }
+        } else {
+            // If it's an opening bracket, push it onto the stack
+            stack.push(char);
+        }
+    }
+    
+    // If the stack is empty, then the string is valid
+    return stack.length === 0;
 };
 
-module.exports = { isValid };
+// Test cases
+console.log(isValid("()"));        // true
+console.log(isValid("()[]{}"));    // true
+console.log(isValid("(]"));        // false
+console.log(isValid("([)]"));      // false
+console.log(isValid("{[]}"));      // true
+console.log(isValid(""));          // true (empty string is valid)
 
-
+// Edge test cases
+console.log(isValid("("));         // false (unmatched opening parenthesis)
+console.log(isValid(")"));         // false (unmatched closing parenthesis)
+console.log(isValid("([{}])"));    // true (nested valid parentheses)
+console.log(isValid("((((()))))")); // true (deeply nested valid parentheses)
+console.log(isValid("((((((())))")); // false (missing closing parentheses)
