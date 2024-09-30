@@ -36,17 +36,5 @@ var isValid = function(s) {
     return stack.length === 0;
 };
 
-// Test cases
-console.log(isValid("()"));        // true
-console.log(isValid("()[]{}"));    // true
-console.log(isValid("(]"));        // false
-console.log(isValid("([)]"));      // false
-console.log(isValid("{[]}"));      // true
-console.log(isValid(""));          // true (empty string is valid)
-
-// Edge test cases
-console.log(isValid("("));         // false (unmatched opening parenthesis)
-console.log(isValid(")"));         // false (unmatched closing parenthesis)
-console.log(isValid("([{}])"));    // true (nested valid parentheses)
 console.log(isValid("((((()))))")); // true (deeply nested valid parentheses)
 console.log(isValid("((((((())))")); // false (missing closing parentheses)
