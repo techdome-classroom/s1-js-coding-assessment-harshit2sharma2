@@ -35,6 +35,3 @@ var isValid = function(s) {
     // If the stack is empty, then the string is valid
     return stack.length === 0;
 };
-
-console.log(isValid("((((()))))")); // true (deeply nested valid parentheses)
-console.log(isValid("((((((())))")); // false (missing closing parentheses)
